@@ -50,7 +50,7 @@ export function FilterRow() {
               </Select>
             ) : (
               <Input
-                aria-label={`Filter by ${col.header}`}
+                aria-label={`Search ${col.header}`}
                 value={columnFilters[col.key] ?? ""}
                 onChange={(e) => setColumnFilter(col.key, e.target.value)}
                 placeholder={
