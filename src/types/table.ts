@@ -33,4 +33,5 @@ export interface ColumnDef {
   align?: "left" | "right" | "center";
   options?: readonly string[]; // for select columns
   format?: (value: EmployeeRow[ColumnKey]) => string; // read-mode display
+  filterPlaceholder?: string; // overrides the default filter placeholder
 }

@@ -55,15 +55,16 @@ export function FilterRow() {
                 onChange={(e) => setColumnFilter(col.key, e.target.value)}
                 title={
                   col.type === "number"
-                    ? "Examples: >100, <50, 50-90"
+                    ? "Supports >, <, >=, <=, = and ranges (min-max)"
                     : undefined
                 }
                 placeholder={
-                  col.type === "number"
+                  col.filterPlaceholder ??
+                  (col.type === "number"
                     ? ">100"
                     : col.type === "date"
                       ? "e.g. 2024"
-                      : `Search ${col.header.toLowerCase()}…`
+                      : `Search ${col.header.toLowerCase()}…`)
                 }
                 className="h-7 text-xs"
               />

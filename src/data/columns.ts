@@ -58,6 +58,7 @@ export const COLUMNS: readonly ColumnDef[] = [
     filterable: true,
     align: "right",
     format: (v) => currency.format(Number(v)),
+    filterPlaceholder: ">120000",
   },
   {
     key: "status",
