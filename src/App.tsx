@@ -45,10 +45,6 @@ function Tips() {
         to cancel
       </span>
       <span>Click a header to sort · again to flip · third clears</span>
-      <span>
-        Numeric filters accept <code>&gt;100</code>, <code>&lt;50</code>,{" "}
-        <code>50-90</code>
-      </span>
     </div>
   );
 }

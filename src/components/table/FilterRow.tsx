@@ -53,6 +53,11 @@ export function FilterRow() {
                 aria-label={`Search ${col.header}`}
                 value={columnFilters[col.key] ?? ""}
                 onChange={(e) => setColumnFilter(col.key, e.target.value)}
+                title={
+                  col.type === "number"
+                    ? "Examples: >100, <50, 50-90"
+                    : undefined
+                }
                 placeholder={
                   col.type === "number"
                     ? ">100"
