@@ -3,6 +3,8 @@
 An inline-editable data table that handles 10,000 rows with virtual scrolling,
 multi-column sorting, filtering, per-row undo and CSV export.
 
+**Live demo:** https://vishkx.github.io/advanced-editable-data-table/
+
 ## Stack
 
 React 19 + TypeScript, Vite, Tailwind v4 with shadcn/ui components, Zustand for
