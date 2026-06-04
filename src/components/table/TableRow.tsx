@@ -85,16 +85,17 @@ function RowInner({ row, style, zebra }: TableRowProps) {
             >
               <Pencil /> Edit
             </Button>
-            <Button
-              size="icon-xs"
-              variant="ghost"
-              onClick={() => undoRow(id)}
-              disabled={!canUndo}
-              aria-label="Undo last saved change"
-              title={canUndo ? "Undo last saved change" : "Nothing to undo"}
-            >
-              <Undo2 />
-            </Button>
+            {canUndo && (
+              <Button
+                size="icon-xs"
+                variant="ghost"
+                onClick={() => undoRow(id)}
+                aria-label="Undo last saved change"
+                title="Undo last saved change"
+              >
+                <Undo2 />
+              </Button>
+            )}
           </>
         )}
       </div>
