@@ -53,18 +53,10 @@ export function FilterRow() {
                 aria-label={`Search ${col.header}`}
                 value={columnFilters[col.key] ?? ""}
                 onChange={(e) => setColumnFilter(col.key, e.target.value)}
-                title={
-                  col.type === "number"
-                    ? "Supports >, <, >=, <=, = and ranges (min-max)"
-                    : undefined
-                }
                 placeholder={
-                  col.filterPlaceholder ??
-                  (col.type === "number"
-                    ? ">100"
-                    : col.type === "date"
-                      ? "e.g. 2024"
-                      : `Search ${col.header.toLowerCase()}…`)
+                  col.type === "date"
+                    ? "e.g. 2024"
+                    : `Search ${col.header.toLowerCase()}…`
                 }
                 className="h-7 text-xs"
               />

@@ -1,40 +1,6 @@
 import type { ColumnDef, EmployeeRow, SortRule } from "@/types/table";
 
-// Builds a predicate for a numeric filter expression: >100, >=100, <100, <=100,
-// =100, or a range like 100-200. Anything else falls back to a substring match.
-function makeNumericPredicate(
-  raw: string
-): ((value: number) => boolean) | null {
-  const expr = raw.trim();
-  if (!expr) return null;
-
-  const range = expr.match(/^(-?\d+(?:\.\d+)?)\s*-\s*(-?\d+(?:\.\d+)?)$/);
-  if (range) {
-    const lo = parseFloat(range[1]);
-    const hi = parseFloat(range[2]);
-    return (v) => v >= Math.min(lo, hi) && v <= Math.max(lo, hi);
-  }
-
-  const op = expr.match(/^(>=|<=|>|<|=)\s*(-?\d+(?:\.\d+)?)$/);
-  if (op) {
-    const n = parseFloat(op[2]);
-    switch (op[1]) {
-      case ">":
-        return (v) => v > n;
-      case ">=":
-        return (v) => v >= n;
-      case "<":
-        return (v) => v < n;
-      case "<=":
-        return (v) => v <= n;
-      case "=":
-        return (v) => v === n;
-    }
-  }
-
-  return (v) => String(v).includes(expr);
-}
-
+// Apply per-column substring filters + global search, then multi-column sort.
 export function filterAndSort(
   rows: EmployeeRow[],
   columns: readonly ColumnDef[],
@@ -47,18 +13,9 @@ export function filterAndSort(
   const predicates: Array<(row: EmployeeRow) => boolean> = [];
 
   for (const col of columns) {
-    const raw = columnFilters[col.key];
-    if (!raw || !raw.trim()) continue;
-
-    if (col.type === "number") {
-      const num = makeNumericPredicate(raw);
-      if (num) predicates.push((row) => num(row[col.key] as number));
-    } else {
-      const needle = raw.trim().toLowerCase();
-      predicates.push((row) =>
-        String(row[col.key]).toLowerCase().includes(needle)
-      );
-    }
+    const raw = columnFilters[col.key]?.trim().toLowerCase();
+    if (!raw) continue;
+    predicates.push((row) => String(row[col.key]).toLowerCase().includes(raw));
   }
 
   const textKeys = columns
