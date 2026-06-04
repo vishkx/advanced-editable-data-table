@@ -31,8 +31,8 @@ bun run preview
   view. There's a Pages toggle for classic pagination as well.
 - Multi-column sorting. Clicking a header cycles ascending, descending, off. When
   more than one column is sorted, a small number on each header shows its priority.
-- Per-column substring filters plus a global search box, and a button to clear
-  filters and sorting.
+- Per-column filtering: text/date columns filter by substring, numeric columns
+  by a min/max range. Plus a global search box and a button to clear everything.
 - Export the current (filtered + sorted) view to CSV.
 - A warning before leaving the page while a row is mid-edit, with a count of
   unsaved rows and bulk Save all / Discard.
@@ -77,7 +77,7 @@ src/
   sample data. Hooking Save up to an API would be the next step.
 - The leave-page warning uses the browser's native dialog, so the message text
   can't be customized.
-- Filtering is plain substring matching, not fuzzy.
+- Text filtering is plain substring matching, not fuzzy.
 
 ## Sample data
 

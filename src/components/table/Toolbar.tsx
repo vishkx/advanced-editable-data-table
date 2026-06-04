@@ -27,6 +27,7 @@ export function Toolbar({ rows, totalRows }: ToolbarProps) {
   const globalFilter = useTableStore((s) => s.globalFilter);
   const setGlobalFilter = useTableStore((s) => s.setGlobalFilter);
   const columnFilters = useTableStore((s) => s.columnFilters);
+  const numericFilters = useTableStore((s) => s.numericFilters);
   const sorting = useTableStore((s) => s.sorting);
   const clearFilters = useTableStore((s) => s.clearFilters);
   const clearSort = useTableStore((s) => s.clearSort);
@@ -39,8 +40,10 @@ export function Toolbar({ rows, totalRows }: ToolbarProps) {
   const activeFilterCount = useMemo(
     () =>
       Object.values(columnFilters).filter((v) => v && v.trim()).length +
+      Object.values(numericFilters).filter((r) => r.min.trim() || r.max.trim())
+        .length +
       (globalFilter.trim() ? 1 : 0),
-    [columnFilters, globalFilter]
+    [columnFilters, numericFilters, globalFilter]
   );
 
   const unsavedCount = Object.keys(drafts).length;

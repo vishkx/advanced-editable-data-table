@@ -9,6 +9,11 @@ import { generateEmployees } from "@/data/generateEmployees";
 
 export type ViewMode = "virtual" | "pagination";
 
+export interface NumericRange {
+  min: string;
+  max: string;
+}
+
 interface TableState {
   rows: EmployeeRow[];
   rowIndex: Record<number, number>; // id -> index in rows, for O(1) lookups
@@ -18,6 +23,8 @@ interface TableState {
 
   sorting: SortRule[]; // array order is the sort priority
   columnFilters: Record<string, string>;
+  /** Min/max range filters, keyed by numeric column. Empty string = open-ended. */
+  numericFilters: Record<string, NumericRange>;
   globalFilter: string;
 
   view: ViewMode;
@@ -35,6 +42,7 @@ interface TableState {
   toggleSort: (key: ColumnKey) => void;
   clearSort: () => void;
   setColumnFilter: (key: ColumnKey, value: string) => void;
+  setNumericFilter: (key: ColumnKey, bound: "min" | "max", value: string) => void;
   setGlobalFilter: (value: string) => void;
   clearFilters: () => void;
 
@@ -66,6 +74,7 @@ export const useTableStore = create<TableState>((set, get) => ({
 
   sorting: [],
   columnFilters: {},
+  numericFilters: {},
   globalFilter: "",
 
   view: "virtual",
@@ -166,9 +175,22 @@ export const useTableStore = create<TableState>((set, get) => ({
       page: 0,
     })),
 
+  setNumericFilter: (key, bound, value) =>
+    set((s) => {
+      const current = s.numericFilters[key] ?? { min: "", max: "" };
+      return {
+        numericFilters: {
+          ...s.numericFilters,
+          [key]: { ...current, [bound]: value },
+        },
+        page: 0,
+      };
+    }),
+
   setGlobalFilter: (value) => set({ globalFilter: value, page: 0 }),
 
-  clearFilters: () => set({ columnFilters: {}, globalFilter: "", page: 0 }),
+  clearFilters: () =>
+    set({ columnFilters: {}, numericFilters: {}, globalFilter: "", page: 0 }),
 
   setView: (view) => set({ view }),
   setPage: (page) => set({ page }),

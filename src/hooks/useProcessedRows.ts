@@ -9,11 +9,20 @@ import type { EmployeeRow } from "@/types/table";
 export function useProcessedRows(): EmployeeRow[] {
   const rows = useTableStore((s) => s.rows);
   const columnFilters = useTableStore((s) => s.columnFilters);
+  const numericFilters = useTableStore((s) => s.numericFilters);
   const globalFilter = useTableStore((s) => s.globalFilter);
   const sorting = useTableStore((s) => s.sorting);
 
   return useMemo(
-    () => filterAndSort(rows, COLUMNS, columnFilters, globalFilter, sorting),
-    [rows, columnFilters, globalFilter, sorting]
+    () =>
+      filterAndSort(
+        rows,
+        COLUMNS,
+        columnFilters,
+        numericFilters,
+        globalFilter,
+        sorting
+      ),
+    [rows, columnFilters, numericFilters, globalFilter, sorting]
   );
 }
