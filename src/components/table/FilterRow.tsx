@@ -53,7 +53,13 @@ export function FilterRow() {
                 aria-label={`Filter by ${col.header}`}
                 value={columnFilters[col.key] ?? ""}
                 onChange={(e) => setColumnFilter(col.key, e.target.value)}
-                placeholder={col.type === "number" ? ">100, 50-90" : "Filter…"}
+                placeholder={
+                  col.type === "number"
+                    ? ">100"
+                    : col.type === "date"
+                      ? "e.g. 2024"
+                      : `Filter ${col.header.toLowerCase()}…`
+                }
                 className="h-7 text-xs"
               />
             )
