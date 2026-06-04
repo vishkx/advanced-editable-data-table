@@ -5,19 +5,17 @@ import { useTableStore } from "@/store/useTableStore";
 function HeaderBar() {
   const total = useTableStore((s) => s.rows.length);
   return (
-    <header className="mb-6 flex items-center gap-3">
-      <div className="grid size-11 place-items-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-        <Table2 className="size-6" />
+    <header className="mb-4 flex flex-wrap items-center gap-x-2.5 gap-y-1">
+      <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+        <Table2 className="size-5" />
       </div>
-      <div>
-        <h1 className="text-xl font-semibold tracking-tight">
-          Editable Data Table
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          {total.toLocaleString()} rows · inline editing · virtual scrolling ·
-          sort · filter · CSV export
-        </p>
-      </div>
+      <h1 className="text-lg font-semibold tracking-tight">
+        Editable Data Table
+      </h1>
+      <span className="hidden text-sm text-muted-foreground sm:inline">
+        {total.toLocaleString()} rows · inline editing · virtual scrolling ·
+        sort · filter · CSV export
+      </span>
     </header>
   );
 }
