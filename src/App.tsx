@@ -12,7 +12,7 @@ function HeaderBar() {
       <h1 className="text-lg font-semibold tracking-tight">
         Editable Data Table
       </h1>
-      <span className="hidden text-sm text-muted-foreground sm:inline">
+      <span className="hidden text-sm text-muted-foreground sm:ml-auto sm:inline">
         {total.toLocaleString()} rows · inline editing · virtual scrolling ·
         sort · filter · CSV export
       </span>
@@ -56,7 +56,7 @@ function Tips() {
 export default function App() {
   return (
     <div className="min-h-svh bg-background">
-      <div className="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-350 px-2 py-4 sm:px-2 lg:px-4">
         <HeaderBar />
         <DataTable />
         <Tips />
