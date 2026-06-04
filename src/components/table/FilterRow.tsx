@@ -58,7 +58,7 @@ export function FilterRow() {
                     ? ">100"
                     : col.type === "date"
                       ? "e.g. 2024"
-                      : `Filter ${col.header.toLowerCase()}…`
+                      : `Search ${col.header.toLowerCase()}…`
                 }
                 className="h-7 text-xs"
               />
