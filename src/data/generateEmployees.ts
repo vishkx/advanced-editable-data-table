@@ -17,11 +17,6 @@ const DEPARTMENTS = [
   "Human Resources", "Customer Success", "Legal", "Design", "Product",
 ];
 
-const ROLES = [
-  "Analyst", "Manager", "Senior Engineer", "Associate", "Director",
-  "Specialist", "Lead", "Coordinator", "VP", "Intern",
-];
-
 export const STATUSES: readonly EmployeeStatus[] = [
   "Active", "Inactive", "Pending", "On Leave",
 ];
@@ -59,9 +54,7 @@ export function generateEmployees(count = 10_000, seed = 42): EmployeeRow[] {
       name: `${first} ${last}`,
       email: `${first}.${last}${id}`.toLowerCase() + "@example.com",
       department: pick(rand, DEPARTMENTS),
-      role: pick(rand, ROLES),
       salary: 40_000 + Math.floor(rand() * 180_000),
-      quantity: 1 + Math.floor(rand() * 500),
       status: pick(rand, STATUSES),
       joinedAt: joined.toISOString().slice(0, 10),
     };
@@ -71,4 +64,3 @@ export function generateEmployees(count = 10_000, seed = 42): EmployeeRow[] {
 }
 
 export const DEPARTMENT_OPTIONS = DEPARTMENTS;
-export const ROLE_OPTIONS = ROLES;

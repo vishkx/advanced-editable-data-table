@@ -1,13 +1,11 @@
 import type { ColumnDef } from "@/types/table";
-import { DEPARTMENT_OPTIONS, ROLE_OPTIONS, STATUSES } from "./generateEmployees";
+import { DEPARTMENT_OPTIONS, STATUSES } from "./generateEmployees";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 0,
 });
-
-const number = new Intl.NumberFormat("en-US");
 
 // Column config. Header, cells, sorting and filtering all read from this.
 export const COLUMNS: readonly ColumnDef[] = [
@@ -51,16 +49,6 @@ export const COLUMNS: readonly ColumnDef[] = [
     options: DEPARTMENT_OPTIONS,
   },
   {
-    key: "role",
-    header: "Role",
-    type: "select",
-    width: 160,
-    editable: true,
-    sortable: true,
-    filterable: true,
-    options: ROLE_OPTIONS,
-  },
-  {
     key: "salary",
     header: "Salary",
     type: "number",
@@ -70,17 +58,6 @@ export const COLUMNS: readonly ColumnDef[] = [
     filterable: true,
     align: "right",
     format: (v) => currency.format(Number(v)),
-  },
-  {
-    key: "quantity",
-    header: "Quantity",
-    type: "number",
-    width: 120,
-    editable: true,
-    sortable: true,
-    filterable: true,
-    align: "right",
-    format: (v) => number.format(Number(v)),
   },
   {
     key: "status",

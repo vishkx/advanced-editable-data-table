@@ -3,9 +3,7 @@ export interface EmployeeRow {
   name: string;
   email: string;
   department: string;
-  role: string;
   salary: number;
-  quantity: number;
   status: EmployeeStatus;
   joinedAt: string; // ISO date string (YYYY-MM-DD)
 }
