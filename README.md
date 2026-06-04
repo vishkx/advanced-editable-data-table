@@ -1,5 +1,7 @@
 # Editable Data Table
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-online-brightgreen)](https://vishkx.github.io/advanced-editable-data-table/)
+
 An inline-editable data table that handles 10,000 rows with virtual scrolling,
 multi-column sorting, filtering, per-row undo and CSV export.
 
